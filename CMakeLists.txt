@@ -9,12 +9,9 @@ set(CMAKE_BUILD_TYPE "Release")
 find_package(ament_cmake REQUIRED)
 set(dependencies
     rclcpp
-    rclcpp_components
-    geometry_msgs
     nav_msgs
     sensor_msgs
     std_msgs
-    pcl_ros
     pcl_conversions
     livox_ros_driver2
 )
@@ -25,10 +22,8 @@ endforeach()
 find_package(Eigen3 REQUIRED)
 find_package(fmt REQUIRED)
 find_package(OpenCV REQUIRED COMPONENTS imgproc)
-find_package(Boost REQUIRED COMPONENTS system)
 find_package(PCL REQUIRED COMPONENTS common io segmentation filters)
 
-include_directories(src/third-party/)
 include_directories(src/)
 include_directories(src/obstacle/)
 
@@ -49,7 +44,6 @@ target_link_libraries(
     pcl_filters
     ${OpenCV_LIBRARIES}
     fmt::fmt
-    Boost::system
 )
 
 install(

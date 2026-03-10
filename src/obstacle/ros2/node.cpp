@@ -5,16 +5,8 @@
 #include "ros2/param.hpp"
 #include "util/parameter.hpp"
 
-#include <geometry_msgs/msg/transform_stamped.hpp>
-#include <pcl/common/transforms.h>
 #include <pcl/filters/crop_box.h>
 #include <rclcpp/logging.hpp>
-#include <std_msgs/msg/float64.hpp>
-#include <tf2/exceptions.h>
-#include <tf2_ros/buffer.h>
-#include <tf2_ros/static_transform_broadcaster.h>
-#include <tf2_ros/transform_broadcaster.h>
-#include <tf2_ros/transform_listener.h>
 
 #include <deque>
 #include <memory>
@@ -46,8 +38,6 @@ struct RmcsMapRuntime::Impl {
     std::shared_ptr<rclcpp::Publisher<sensor_msgs::msg::PointCloud2>> segmentation_publisher;
     std::shared_ptr<rclcpp::Publisher<nav_msgs::msg::OccupancyGrid>> obstacle_publisher;
 
-    std::shared_ptr<tf2_ros::StaticTransformBroadcaster> static_transform_broadcaster;
-
     explicit Impl(rclcpp::Node& node) {
         const auto p = util::quick_paramtetr_reader(node);
         param::bind(node);
@@ -64,8 +54,6 @@ struct RmcsMapRuntime::Impl {
         map_width = p("grid.map_width", double{});
         map_height = p("grid.map_height", double{});
         map_frame = p("name.frame", std::string{"base_link"});
-
-        static_transform_broadcaster = std::make_shared<tf2_ros::StaticTransformBroadcaster>(&node);
 
         p("switch.undistort", bool{}) ? setup_undistortion_mode(node) : setup_normal_node(node);
     }
