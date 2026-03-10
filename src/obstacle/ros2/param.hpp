@@ -3,15 +3,17 @@
 #include "util/parameter.hpp"
 
 #include <rclcpp/node.hpp>
+#include <stdexcept>
 
 namespace param {
-inline auto node = std::shared_ptr<rclcpp::Node>();
+inline auto node = static_cast<rclcpp::Node*>(nullptr);
+
+inline auto bind(rclcpp::Node& owner) -> void { node = &owner; }
 
 template <typename T>
 inline auto get(const std::string& name) {
-    // node for lazy constructing
     if (node == nullptr)
-        node = std::make_shared<rclcpp::Node>("rmcs_map", rmcs::util::NodeOptions{});
+        throw std::runtime_error("param::bind(node) must be called before param::get");
 
     auto param = T{};
     node->get_parameter<T>(name, param);

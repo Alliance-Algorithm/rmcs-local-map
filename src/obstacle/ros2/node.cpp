@@ -2,6 +2,7 @@
 #include "obstacle/map/process.hpp"
 #include "ros2/convert.hpp"
 #include "ros2/factory.hpp"
+#include "ros2/param.hpp"
 #include "util/parameter.hpp"
 
 #include <geometry_msgs/msg/transform_stamped.hpp>
@@ -29,7 +30,7 @@ struct RmcsMapRuntime::Impl {
     using Point = pcl::PointXYZ;
     using PointCloud = pcl::PointCloud<Point>;
 
-    Process process;
+    std::unique_ptr<Process> process;
     std::unique_ptr<Factory> factory;
 
     bool switch_publish = false;
@@ -49,6 +50,8 @@ struct RmcsMapRuntime::Impl {
 
     explicit Impl(rclcpp::Node& node) {
         const auto p = util::quick_paramtetr_reader(node);
+        param::bind(node);
+        process = std::make_unique<Process>();
 
         obstacle_publisher =
             node.create_publisher<nav_msgs::msg::OccupancyGrid>(p("name.grid", std::string{}), 10);
@@ -185,17 +188,17 @@ struct RmcsMapRuntime::Impl {
 
         // generate grid map
         auto grid_map = std::make_shared<nav_msgs::msg::OccupancyGrid>();
-        auto node_map = process.generate_node_map(segmentation_part);
+        auto node_map = process->generate_node_map(segmentation_part);
         node_to_grid_map(*node_map, *grid_map);
 
         grid_map->header.frame_id = map_frame;
         grid_map->header.stamp = header.stamp;
-        grid_map->info.resolution = process.resolution();
-        grid_map->info.height = process.size_num();
-        grid_map->info.width = process.size_num();
+        grid_map->info.resolution = process->resolution();
+        grid_map->info.height = process->size_num();
+        grid_map->info.width = process->size_num();
 
-        grid_map->info.origin.position.x = -process.map_width() / 2.0;
-        grid_map->info.origin.position.y = -process.map_width() / 2.0;
+        grid_map->info.origin.position.x = -process->map_width() / 2.0;
+        grid_map->info.origin.position.y = -process->map_width() / 2.0;
         grid_map->info.origin.position.z = 0.0;
         grid_map->info.origin.orientation.x = 0.0;
         grid_map->info.origin.orientation.y = 0.0;
