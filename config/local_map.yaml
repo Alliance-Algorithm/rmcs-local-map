@@ -1,7 +1,7 @@
 rmcs_map:
   ros__parameters:
     name:
-      grid: "/rmcs_map/map/grid"
+      grid: "/local_map"
       node: "rmcs_map"
       frame: "base_link"
     switch:
@@ -16,16 +16,16 @@ rmcs_map:
       imu_extrinsic_translation: [ -0.011, -0.02329, 0.04412 ]
       imu_extrinsic_orientation: [ 1., 0., 0., 0. ]
 
-      lid_topic: "/livox/lidar"
-      imu_topic: "/livox/imu"
+      lid_topic: "/livox/lidar_192_168_100_120"
+      imu_topic: "/livox/imu_192_168_100_120"
       # 雷达原点在底盘坐标系的坐标
       # 单位是m，浮点数
       # x y z
-      lidar_translation: [ +0.0, +0.0, +0.60 ]
+      lidar_translation: [ +0.12, -0.12, +0.30 ]
       # 描述了雷达坐标系如何旋转到底盘坐标系
       # 单位是度，浮点数
-      # yaw pith roll
-      lidar_orientation: [ -90.0, 0.0, 180.0 ]
+      # yaw pitch roll
+      lidar_orientation: [ -30.0, 30.0, 0.0 ]
 
       # 单帧点云浮动比较大，多帧累积起来障碍物会拖长，
       # 以及未纠正到位的旋转畸变会叠加，但障碍地图会稳定很多
