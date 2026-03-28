@@ -21,7 +21,7 @@ rmcs_map:
       # 雷达原点在底盘坐标系的坐标
       # 单位是m，浮点数
       # x y z
-      lidar_translation: [ +0.12, -0.12, +0.30 ]
+      lidar_translation: [ +0.12, -0.12, +0.25 ]
       # 描述了雷达坐标系如何旋转到底盘坐标系
       # 单位是度，浮点数
       # yaw pitch roll
@@ -40,25 +40,25 @@ rmcs_map:
 
     grid:
       # 栅格地图的分辨率，单位 m
-      resolution: 0.02
+      resolution: 0.04
       # 栅格地图边长，单位 m
-      map_width: 10.1
+      map_width: 16.1
       # 地图高度，单位 m
       map_height: 2.0
       # 雷达的盲区，球形直径
-      lidar_blind: 1.2
+      lidar_blind: 0.6
       # 有效点数量阈值，出现在网格的点大于该数才视作有效
       points_limit: 5
       # 有效点高度区间阈值，障碍物栅格高度极值之差大于此值才视作有效
       height_limit: 0.06
       # 影响半径，一个点的高度信息可以影响的圆形区域
       # 为了弥补点云密度不够的补偿
-      influence_radius: 0.03
+      influence_radius: 0.08
 
     filter:
       # 预先膨胀，为了更好的闭合障碍物
-      pre_dilate_size: 15
-      pre_dilate_times: 1
+      pre_dilate_size: 3
+      pre_dilate_times: 0
       # 闭合，拟补激光雷达点云的缺口
       pre_close_size: 3
       pre_close_times: 1

@@ -4,7 +4,7 @@
   <version>0.0.0</version>
   <description>Standalone RMCS obstacle local map package.</description>
 
-  <maintainer email="dev@livoxtech.com">claydergc</maintainer>
+  <maintainer email="creeper5820@protonmail.com">creeper5820</maintainer>
   <license>BSD</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
