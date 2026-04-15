@@ -13,19 +13,19 @@ rmcs_map:
       publish_test: false
 
     lidar:
-      imu_extrinsic_translation: [ -0.011, -0.02329, 0.04412 ]
-      imu_extrinsic_orientation: [ 1., 0., 0., 0. ]
+      imu_extrinsic_translation: [-0.011, -0.02329, 0.04412]
+      imu_extrinsic_orientation: [1., 0., 0., 0.]
 
-      lid_topic: "/livox/lidar_192_168_100_120"
-      imu_topic: "/livox/imu_192_168_100_120"
+      lid_topic: "/livox/lidar_192_168_100_174"
+      imu_topic: "/livox/imu_192_168_100_174"
       # 雷达原点在底盘坐标系的坐标
       # 单位是m，浮点数
       # x y z
-      lidar_translation: [ +0.12, -0.12, +0.25 ]
+      lidar_translation: [0.00, 0.00, +0.40]
       # 描述了雷达坐标系如何旋转到底盘坐标系
       # 单位是度，浮点数
       # yaw pitch roll
-      lidar_orientation: [ -30.0, 30.0, 0.0 ]
+      lidar_orientation: [0.0, 0.0, 180.0]
 
       # 单帧点云浮动比较大，多帧累积起来障碍物会拖长，
       # 以及未纠正到位的旋转畸变会叠加，但障碍地图会稳定很多
@@ -46,7 +46,7 @@ rmcs_map:
       # 地图高度，单位 m
       map_height: 2.0
       # 雷达的盲区，球形直径
-      lidar_blind: 0.6
+      lidar_blind: 0.7
       # 有效点数量阈值，出现在网格的点大于该数才视作有效
       points_limit: 5
       # 有效点高度区间阈值，障碍物栅格高度极值之差大于此值才视作有效
