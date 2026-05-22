@@ -87,17 +87,16 @@ struct RmcsMapRuntime::Impl {
         const auto imu_extrinsic_transform = Eigen::Isometry3d{
             //
             Eigen::Translation3d{
-                                 imu_extrinsic_translation[0],
-                                 imu_extrinsic_translation[1],
-                                 imu_extrinsic_translation[2],
-                                 }
+                imu_extrinsic_translation[0],
+                imu_extrinsic_translation[1],
+                imu_extrinsic_translation[2],
+            }
             * Eigen::Quaterniond{
-                                 imu_extrinsic_orientation[0],
-                                 imu_extrinsic_orientation[1],
-                                 imu_extrinsic_orientation[2],
-                                 imu_extrinsic_orientation[3],
-                                 }
-        };
+                imu_extrinsic_orientation[0],
+                imu_extrinsic_orientation[1],
+                imu_extrinsic_orientation[2],
+                imu_extrinsic_orientation[3],
+            }};
 
         const auto callback = [this](const auto& p0, const auto& p1) {
             pointcloud_preprocess(p0, p1);
