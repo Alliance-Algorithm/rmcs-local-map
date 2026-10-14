@@ -16,8 +16,8 @@ rmcs_map:
       imu_extrinsic_translation: [-0.011, -0.02329, 0.04412]
       imu_extrinsic_orientation: [1., 0., 0., 0.]
 
-      lid_topic: "/livox/lidar_192_168_100_174"
-      imu_topic: "/livox/imu_192_168_100_174"
+      lid_topic: "/livox/lidar_192_168_100_120"
+      imu_topic: "/livox/imu_192_168_100_120"
       # 雷达原点在底盘坐标系的坐标
       # 单位是m，浮点数
       # x y z
