@@ -21,7 +21,7 @@ rmcs_map:
       # 雷达原点在底盘坐标系的坐标
       # 单位是m，浮点数
       # x y z
-      lidar_translation: [0.997, -0.135, +0.1377]
+      lidar_translation: [0.1234, -0.1114, +0.1377]
       # 描述了雷达坐标系如何旋转到底盘坐标系
       # 单位是度，浮点数
       # yaw pitch roll
